@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Iniciar sesión</title>
+
+<link rel="stylesheet" type="text/css" href="NewContact.css">
+<script>
+// Defining a function to display error message
+function printError(elemId, hintMsg) {
+    document.getElementById(elemId).innerHTML = hintMsg;
+}
+
+// Defining a function to validate form 
+function validateForm() {
+    // Retrieving the values of form elements 
+    var Usuario = document.contactForm.Usuario.value;
+    var contraseña = document.contactForm.contraseña.value;
+  
+    for(var i=0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked) {
+            // Populate hobbies array with selected values
+            hobbies.push(checkboxes[i].value);
+        }                                                     
+    }
+    
+	// Defining error variables with a default value
+    var UsuarioErr = contraseñaErr = true;
+    
+    // Validate Usuario
+    if(Usuario == "") {
+        printError("UsuarioErr", "Please enter your Usuario");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;                
+        if(regex.test(Usuario) === false) {
+            printError("UsuarioErr", "Please enter a valid Usuario");
+        } else {
+            printError("UsuarioErr", "");
+            UsuarioErr = false;
+        }
+    }
+    
+    // Validate contraseña
+    if(contaseña == "") {
+        printError("contraseñaErr", "Please enter your contraseña");
+    } else {
+        // Regular expression for basic contraseña validation
+        var regex = /^\S+@\S+\.\S+$/;
+        if(regex.test(contraseña) === false) {
+            printError("cotraseñaErr", "Please enter a valid contrseña");
+        } else{
+            printError("ontraseñaErr", "");
+            contraseñaErr = false;
+        }
+    }
+    
+    {
+        // Creating a string from input data for preview
+        var dataPreview = "You've entered the following details: \n" +
+                          "Full Usuario: " + Usuario + "\n" +
+                          "Email contraseña: " + contraseña + "\n";
+        if(hobbies.length) {
+            dataPreview += "Hobbies: " + hobbies.join(", ");
+        }
+        // Display input data in a dialog box before submitting the form
+        alert(dataPreview);
+    }
+};
+</script>
+</head>
+<body>
+<form Usuario="contactForm" id= "contact" onsubmit="return validateForm()"  method="post">
+    <center><img src="logo.png" width="200px" height="200px"></center>
+    <h3><center>Inicio de sesion</center></h3>
+    <div class="container">  
+    <div class="row">
+        <label>Usuario</label>
+        <input type="text" name="name">
+        <div class="error" id="nameErr"></div>
+    </div>
+    <div class="row">
+        <label>Contraseña</label>
+        <input type="text" name="email">
+        <div class="error" id="emailErr"></div>
+    </div>
+    </div>
+    <div class="row">
+        <a href="index.html"> <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Enviar</button></a>
+    </div>
+</div>
+</form>
+</body>
+</html>
